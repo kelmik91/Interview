@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // Что выведет alert(typeof NaN); ?
+    // number, поскольку NaN относится к числовому типу
+
+    // Что выведет alert(NaN === NaN); ?
+    // false, NaN не может быть равен NaN
+
+    // 0.1 + 0.2 == 0.3 ?
+    // Выражение ложно. 0.1 + 0.2 будет равно 0.30000000000000004 из-за особеностей языка JS
+
+    // Какой тип будет иметь переменная a, если она создается при помощи следующего кода:
+    // var a = "a,b".split(',');
+    // object. функция split хоть и возвращает массив, но он все равно относиться к типу object
+
+    // Сделать так, чтобы при нажатии на элемент <а> алертом выводилось «Hello world!».
+    document.write( '<a href="#" onclick="alert(`Hello world!`)">Задание 5</a>' );
+
+    // Найти все элементы div с классом one, а также все элементы p с классом two. Затем добавить им всем класс three
+    // и визуально плавно спустить вниз.
+    // $("div.one").add("p.two").addClass("three").slideDown("slow");
+
+    // Выбрать видимый div с именем red, который содержит тег span.
+    // $( "div[name=red]:visible:has(span) ");
+
+    // Привести пример замыкания.
+    // Замыкание – это функция, которая запоминает свои внешние переменные и может получить к ним доступ.
+    // В JavaScript, все функции изначально являются замыканиями.
+    function sum(a) {
+
+        return function(b) {
+            return a + b; // берёт "a" из внешнего лексического окружения
+        };
+
+    }
+    sum(1)(2); // 3
+
+    // Написать функцию, которая уменьшает или увеличивает указанное время на заданное количество минут
+    function changeTime(time, upTime) {
+        time = time.split(":");
+        let hours = Number(time[0]);
+        let minutes = Number(time[1]);
+        var d =new Date(2000,1,1,hours,minutes + upTime);
+        return ('0'+d.getHours()).slice(-2)+':' + ('0'+ d.getMinutes()).slice(-2);
+
+    }
+    console.log(changeTime('10:00', 1)); //return '10:01'
+    console.log(changeTime('10:00', -1)); //return '09:59'
+    console.log(changeTime('23:59', 15)); //return '00:00'
+    console.log(changeTime('00:00', -1)); //return '23:59'
+
+    // Написать функцию, возвращающую градус, на который указывают часовая и минутная стрелки в зависимости от времени
+    function clock_degree(time) {
+        time = time.split(":");
+        let hour = time[0];
+        let minute = time[1];
+        let degreeHour;
+        if (hour === "00") {
+            degreeHour = 360;
+        } else if (hour > 12) {
+            hour = hour - 12;
+            degreeHour = 30 * hour;
+        } else {
+            degreeHour = 30 * hour;
+        }
+        let degreeMinute;
+        if (minute === "00") {
+            degreeMinute = 360;
+        } else {
+            degreeMinute = 6 * minute;
+        }
+        let degreeTime = '"' + degreeHour + ':' + degreeMinute + '"';
+        return degreeTime;
+    }
+    console.log(clock_degree("00:00"));
+    console.log(clock_degree("01:01"));
+    console.log(clock_degree("20:34"));
+
+    // Написать простую игру «Угадай число». Программа загадывает случайное число от 0 до 100.
+    // Игрок должен вводить предположения и получать ответы «Больше», «Меньше» или «Число угадано».
+    let num = Math.floor(Math.random() * 100);
+    console.log(num);
+    do {
+        let numPeopl = +prompt("Введите число");
+        if (isNaN(numPeopl)) {
+            alert("Ошибка ввода! Введите число");
+        } else if (numPeopl > num) {
+            alert("Заоаданое число меньше");
+        } else if (numPeopl < num) {
+            alert("Загаданое число больше");
+        } else {
+            alert("Число угадано");
+            break;
+        }
+    } while (true);
+</script>
+
+</body>
+</html>
